@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
 import style from './ContactForm.module.css';
 
-import { addContact } from '../../redux/contactsOps';
+import { addContact } from '../../redux/contacts/operations';
 
 import { useDispatch} from 'react-redux';
 
