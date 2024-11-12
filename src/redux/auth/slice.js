@@ -3,15 +3,16 @@ import { apiLoginUser, apiRegisterUser } from "./operations";
 import { createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
-    userData: null,
-    isLoading: false,
-    error: null,
-  
-    token: null,
-    isRefreshing: false,
-    isLoggedIn: false,
-  };
-  
+  user: {
+    name: null,
+    email: null,
+  },
+  isLoading: false,
+  error: null,
+  token: null,
+  isLoggedIn: false,
+  isRefreshing: false,
+};
 
 
 
@@ -30,7 +31,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isLoggedIn = true;
       state.token = action.payload.token;
-      state.userData = action.payload.user;
+      state.user = action.payload.user;
   
     })
   
@@ -48,7 +49,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isLoggedIn = true;
       state.token = action.payload.token;
-      state.userData = action.payload.user;
+      state.user = action.payload.user;
   
     })
   

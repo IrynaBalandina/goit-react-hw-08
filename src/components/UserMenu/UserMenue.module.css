@@ -1,0 +1,17 @@
+.btn {
+    width: 100px;
+    padding: 10px;
+    background-color: black;
+    color: rgba(15, 300, 15, 0.5);
+    border: 1px solid #21191a;
+    cursor: pointer;
+  }
+  .menu {
+    display: flex;
+    gap: 15px;
+    place-items: center;
+  }
+  .userText{
+    font-size: 20px;
+    font-weight: 500;
+  }

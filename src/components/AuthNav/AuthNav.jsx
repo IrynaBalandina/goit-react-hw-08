@@ -1,10 +1,12 @@
 import clsx from "clsx";
 import style from './AuthNav.module.css';
-import {NavLink}
+import { NavLink } from "react-router-dom";
+
 
 const buildNavLinkClass = ({ isActive }) => {
-    return clsx(style.link, isActive && style.active);
-  };
+  return clsx(style.link, isActive && style.active);
+};
+
 
 const AuthNav = () => {
   return (

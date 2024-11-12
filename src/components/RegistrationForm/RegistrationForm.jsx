@@ -1,9 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useId } from 'react';
+import style from './RegistrationForm.css';
 import * as Yup from 'yup';
-import { nanoid } from 'nanoid';
+
 import { useDispatch } from 'react-redux';
-import 
+import { apiRegisterUser } from '../../redux/auth/operations';
 
 const INITIAL_VALUES = {
   
@@ -34,56 +34,71 @@ const INITIAL_VALUES = {
   
   const RegistrationForm = () => {
     
-    const dispatch = useDispatch();
-  
-    const nameId = useId();
-    const phoneId = useId();
-  
-  
-    const handleSubmit = (values, actions) => {
-      const newContact = {
-       name: values.name,
-       number: values.number,
-       id: nanoid(),
-     };
-     dispatch(addContact(newContact));
-     actions.resetForm();
-   };
-  
+    const dispatch = useDispatch()
+  const handleSubmit = (values, actions) => {
+    console.log("values:", values);
+    dispatch(apiRegisterUser(values))
+   actions.resetForm();
+  };
+
   
     return (
-  
+  <div>
       <Formik
       initialValues={INITIAL_VALUES}
       validationSchema={RegisterNewUserSchema}
        onSubmit={handleSubmit}>
-              <Form className = {style.form}>
+        
   
-  <label className = {style.label} htmlFor={nameId}>Name</label>
-  <Field 
-  className = {style.field}
-  type="text" 
-  name="name" 
-  placeholder="Jane Dow" 
-  id={nameId}
-  />
-  <ErrorMessage name="name" component="span" />
-  
-  <label className = {style.label} htmlFor={phoneId}>Number</label>
-  <Field 
-  className= {style.field}
-  type="phone" 
-  name="number" 
-  
-  placeholder = "+38xxxxxxxxxx" 
-  id = {phoneId}/>
-  <ErrorMessage name="number" component="span" />
-  
+              <Form className={style.form}>
+          <label className={style.label}>
+            <span>Name:</span>
+            <Field
+              type="text"
+              name="name"
+              className={style.input}
+              placeholder="Ivan Ivanov"
+            />
+            <ErrorMessage
+              className={style.errorMessage}
+              name="name"
+              component="span"
+            />
+          </label>
+          <label className={style.label}>
+            <span>Email:</span>
+            <Field
+              type="text"
+              name="email"
+              className={style.input}
+              placeholder="example.email@example.com"
+            />
+            <ErrorMessage
+              className={style.errorMessage}
+              name="email"
+              component="span"
+            />
+          </label>
+          <label className={style.label}>
+            <span>Password:</span>
+            <Field
+              type="password"
+              name="password"
+              className={style.input}
+              placeholder="Enter your password"
+            />
+            <ErrorMessage
+              className={style.errorMessage}
+              name="password"
+              component="span"
+            />
+          </label>
   
   <button className = {style.button} type="submit">Registration</button>
               </Form>
       </Formik>
-    );
-  };
+      </div>
+    )
+  }
 
 export default RegistrationForm;
