@@ -45,7 +45,7 @@ export const contactsAPI = axios.create({
     }
   );
 
-  export const logOut = createAsyncThunk('auth/logout', async (_, thunkApi) => {
+  export const apiLogOut = createAsyncThunk('auth/logout', async (_, thunkApi) => {
     try {
     await contactsAPI.post('/users/logout');
       clearAuthToken();
@@ -54,16 +54,13 @@ export const contactsAPI = axios.create({
     }
   });
 
-  export const refreshUser = createAsyncThunk(
+  export const apiRefreshUser = createAsyncThunk(
     'auth/refresh',
     async (_, thunkApi) => {
       const state = thunkApi.getState();
       const persistedToken = state.auth.token;
   
-      if (persistedToken === null) {
-        return thunkApi.rejectWithValue('Unable to fetch user');
-      }
-  
+     
       try {
         setAuthToken(persistedToken);
         const { data} = await contactsAPI.get('/users/current');

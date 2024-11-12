@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import style from './RegistrationForm.css';
+import style from './RegistrationForm.module.css';
 import * as Yup from 'yup';
 
 import { useDispatch } from 'react-redux';
@@ -10,7 +10,6 @@ const INITIAL_VALUES = {
     name:"",
     email:"", 
     password:"", 
-   
    
   };
   
@@ -36,14 +35,18 @@ const INITIAL_VALUES = {
     
     const dispatch = useDispatch()
   const handleSubmit = (values, actions) => {
-    console.log("values:", values);
+ 
     dispatch(apiRegisterUser(values))
    actions.resetForm();
   };
 
   
     return (
-  <div>
+  <div className={style.wrapper}>
+    <h2 className={style.title}>Welcome</h2>
+      <p className={style.message}>
+     Please, create your account!
+      </p>
       <Formik
       initialValues={INITIAL_VALUES}
       validationSchema={RegisterNewUserSchema}
@@ -51,6 +54,7 @@ const INITIAL_VALUES = {
         
   
               <Form className={style.form}>
+                <div className={style.listForm}>
           <label className={style.label}>
             <span>Name:</span>
             <Field
@@ -93,8 +97,10 @@ const INITIAL_VALUES = {
               component="span"
             />
           </label>
-  
+  <div className={style.buttonContainer}>
   <button className = {style.button} type="submit">Registration</button>
+  </div>
+  </div>
               </Form>
       </Formik>
       </div>

@@ -37,7 +37,7 @@ const INITIAL_VALUES = {
     };
   
     return (
-  <div>
+  <div className={style.wrapper}>
       <Formik
       initialValues={INITIAL_VALUES}
       validationSchema={LoginUserSchema}
@@ -45,7 +45,7 @@ const INITIAL_VALUES = {
         
   
               <Form className={style.form}>
-          
+          <div className={style.listForm}>
           <label className={style.label}>
             <span>Email:</span>
             <Field
@@ -74,8 +74,10 @@ const INITIAL_VALUES = {
               component="span"
             />
           </label>
-  
+  <div className={style.buttonContainer}>
   <button className = {style.button} type="submit">Login</button>
+  </div>
+  </div>
               </Form>
       </Formik>
       </div>

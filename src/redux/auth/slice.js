@@ -1,25 +1,19 @@
 
-import { apiLoginUser, apiRegisterUser } from "./operations";
+import { apiLoginUser, apiRegisterUser, apiRefreshUser, apiLogOut } from "../auth/operations";
 import { createSlice } from "@reduxjs/toolkit";
-
-const INITIAL_STATE = {
-  user: {
-    name: null,
-    email: null,
-  },
-  isLoading: false,
-  error: null,
-  token: null,
-  isLoggedIn: false,
-  isRefreshing: false,
-};
-
 
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: INITIAL_STATE,
-
+  initialState:{
+    user: {
+      name: null,
+      email: null,
+    },
+    token: null,
+    isLoggedIn: false,
+    isRefreshing: false,
+  },
     extraReducers: (builder) =>
       builder
     .addCase(apiRegisterUser.pending, (state) => {
@@ -56,6 +50,23 @@ const authSlice = createSlice({
     .addCase(apiLoginUser.rejected, (state, action) => {
       state.isLoading = false;
     state.error = action.payload;
+    })
+
+    .addCase(apiLogOut.fulfilled, (state) => {
+      state.user = { name: null, email: null };
+      state.token = null;
+      state.isLoggedIn = false;
+    })
+    .addCase(apiRefreshUser.pending, (state) => {
+      state.isRefreshing = true;
+    })
+    .addCase(apiRefreshUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+      state.isRefreshing = false;
+    })
+    .addCase(apiRefreshUser.rejected, (state) => {
+      state.isRefreshing = false;
     })
   },
 );
