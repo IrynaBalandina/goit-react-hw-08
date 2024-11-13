@@ -1,9 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { apiLoginUser } from '../../redux/auth/operations';
 import * as Yup from 'yup';
-
 import { useDispatch } from 'react-redux';
-import style from './LoginForm.module.css'
+import style from './LoginForm.module.css';
+
 
 const INITIAL_VALUES = {
   

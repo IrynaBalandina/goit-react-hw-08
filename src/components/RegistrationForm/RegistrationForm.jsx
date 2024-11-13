@@ -1,7 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import style from './RegistrationForm.module.css';
 import * as Yup from 'yup';
-
 import { useDispatch } from 'react-redux';
 import { apiRegisterUser } from '../../redux/auth/operations';
 
@@ -43,10 +42,11 @@ const INITIAL_VALUES = {
   
     return (
   <div className={style.wrapper}>
-    <h2 className={style.title}>Welcome</h2>
+    <h2 className={style.title}>Welcome, user!</h2>
       <p className={style.message}>
      Please, create your account!
       </p>
+
       <Formik
       initialValues={INITIAL_VALUES}
       validationSchema={RegisterNewUserSchema}
