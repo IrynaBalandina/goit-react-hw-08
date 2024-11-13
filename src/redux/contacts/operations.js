@@ -31,7 +31,7 @@ export const deleteContact = createAsyncThunk(
   async (id, thunkApi) => {
     try {
       const {data}  = await contactsAPI.delete(`contacts/${id}`);
-      return data.id;
+      return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
