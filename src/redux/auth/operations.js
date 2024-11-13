@@ -59,6 +59,9 @@ export const contactsAPI = axios.create({
     async (_, thunkApi) => {
       const state = thunkApi.getState();
       const persistedToken = state.auth.token;
+      if (persistedToken === null) {
+        return thunkApi.rejectWithValue('Unable to fetch user');
+      }
   
      
       try {

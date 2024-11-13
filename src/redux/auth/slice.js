@@ -51,12 +51,20 @@ const authSlice = createSlice({
       state.isLoading = false;
     state.error = action.payload;
     })
-
+    .addCase(apiLogOut.pending, state => {
+      state.isLoading = true;
+      state.error = null;
+    })
     .addCase(apiLogOut.fulfilled, (state) => {
       state.user = { name: null, email: null };
       state.token = null;
       state.isLoggedIn = false;
     })
+    .addCase(apiLogOut.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    })
+
     .addCase(apiRefreshUser.pending, (state) => {
       state.isRefreshing = true;
     })
